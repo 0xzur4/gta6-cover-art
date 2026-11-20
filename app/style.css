@@ -1,0 +1,125 @@
+/* Neon Palms Cover Studio — dark neon editor. Fonts are local files under fonts/. */
+@font-face {
+  font-family: 'Anton';
+  src: url('./fonts/Anton-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pacifico';
+  src: url('./fonts/Pacifico-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: #0d0a14;
+  color: #f2ecff;
+  font: 15px/1.45 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.app { display: grid; grid-template-columns: 348px 1fr; min-height: 100vh; }
+.controls {
+  padding: 20px 20px 40px;
+  background: #14101f;
+  border-right: 1px solid #2a2140;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+.controls h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: 30px;
+  letter-spacing: 0.5px;
+  margin: 0 0 4px;
+  color: #fff;
+}
+.controls h1 span { color: #ff2fb3; }
+.tag { color: #b9aed6; margin: 0 0 16px; font-size: 13.5px; }
+.controls h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  color: #00e5ff;
+  margin: 22px 0 8px;
+}
+.controls label { display: block; margin: 8px 0; font-size: 13.5px; color: #cfc6e8; }
+.controls label.check { display: flex; gap: 8px; align-items: center; }
+.controls input[type="text"], .controls select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px 10px;
+  border: 1px solid #3a2f5c;
+  border-radius: 8px;
+  background: #1d1730;
+  color: #fff;
+  font: inherit;
+}
+.controls input[type="range"] { display: block; width: 100%; accent-color: #ff2fb3; }
+.hint { color: #8f84ad; font-size: 12.5px; margin: 6px 0 0; }
+
+.btnrow { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.btnrow button, #fillAll {
+  padding: 7px 12px;
+  border: 1px solid #3a2f5c;
+  border-radius: 999px;
+  background: #1d1730;
+  color: #e9e2ff;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.btnrow button:hover, #fillAll:hover { border-color: #ff2fb3; }
+.btnrow button.active { background: #ff2fb3; border-color: #ff2fb3; color: #fff; }
+.btnrow button:disabled { opacity: 0.4; cursor: default; }
+.btnrow button.primary { background: #00b3c6; border-color: #00b3c6; color: #04121a; font-weight: 700; }
+.btnrow button.primary:hover { background: #00e5ff; }
+#fillAll { width: 100%; margin: 8px 0 0; }
+.actions { margin-top: 18px; }
+
+.thumbs { display: flex; gap: 8px; flex-wrap: wrap; }
+.thumb {
+  position: relative;
+  width: 76px; height: 76px;
+  padding: 0; border: 2px solid #3a2f5c; border-radius: 8px;
+  overflow: hidden; cursor: pointer; background: #1d1730;
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb span {
+  position: absolute; left: 4px; bottom: 4px;
+  background: rgba(8,4,16,0.85); color: #fff;
+  font-size: 11px; padding: 1px 6px; border-radius: 999px;
+}
+.file { cursor: pointer; color: #00e5ff; }
+
+#status { min-height: 20px; color: #7dffb0; font-size: 13px; margin: 10px 0 0; }
+
+.preview {
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; min-height: 100vh;
+  background:
+    radial-gradient(900px 500px at 70% 10%, rgba(255,47,179,0.16), transparent 60%),
+    radial-gradient(700px 500px at 20% 90%, rgba(0,229,255,0.12), transparent 60%),
+    #0d0a14;
+}
+#cover {
+  max-width: min(100%, calc(100vh - 48px));
+  max-height: calc(100vh - 48px);
+  width: auto; height: auto;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px #2a2140;
+  border-radius: 4px;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+/* Screenshot mode: cover only, edge to edge. */
+body.shot-cover { background: #000; }
+body.shot-cover .controls { display: none; }
+body.shot-cover .app { display: block; }
+body.shot-cover .preview { padding: 0; background: #000; min-height: 0; }
+body.shot-cover #cover {
+  width: 100vw; height: 100vh;
+  max-width: none; max-height: none;
+  object-fit: contain;
+  box-shadow: none; border-radius: 0;
+}
